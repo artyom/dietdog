@@ -45,6 +45,9 @@ func New(opts ...Option) *writer {
 	for _, opt := range opts {
 		opt(&s.config)
 	}
+	if s.auth == "" && s.log != nil {
+		s.log.Print("dietdog.New called without an auth option, its writes would be no-op")
+	}
 	return s
 }
 
